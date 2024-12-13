@@ -7,6 +7,7 @@ const port = process.env.PORT || 10000
 const app = express();
 app.use(cors);
 app.use(bodyParser.json());
+app.options('*', cors());
 
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
