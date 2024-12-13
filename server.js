@@ -2,24 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const port = process.env.PORT || 3000
 
 const app = express();
 app.use(cors);
 app.use(bodyParser.json());
-
-const corsOptions = {
-  // Replace with your domain
-  origin: 'http://localhost:4200',
-  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
-
-  // Enable this if you need to
-  // send cookies or HTTP authentication
-  credentials: true,
-  optionsSuccessStatus: 204
-};
-
-app.use(cors(corsOptions));
 
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
@@ -49,6 +35,6 @@ app.post('/api/contact', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
 });
