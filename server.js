@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const port=process.env.PORT || 3000;
+const port=process.env.PORT || 10000;
 
 const app = express();
 app.use(cors);
@@ -36,6 +36,6 @@ app.post('/api/contact', (req, res) => {
   });
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log('Servidor rodando na porta 3000');
 });
