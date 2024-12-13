@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
   
+  
   // Configure o transporter do nodemailer com suas credenciais de e-mail
   const transporter = nodemailer.createTransport({
     service: 'gmail',
