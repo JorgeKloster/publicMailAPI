@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const port = process.env.PORT || 3000
 
 const app = express();
 app.use(cors);
@@ -24,9 +25,37 @@ const allowCors = fn => async (req, res) => {
   return await fn(req, res)
 }
 
-module.exports = allowCors(app.post)
+module.exports = allowCors(
+  app.post('/api/contact', (req, res) => {
+    const { name, email, message } = req.body;
+    
+    // Configure o transporter do nodemailer com suas credenciais de e-mail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'georgenes1999@gmail.com',
+        pass: 'gxhk gacr dlta sujk'
+      }
+    });
+  
+    const mailOptions = {
+      from: email,
+      to: 'jfk@kwaut.com',
+      subject: `Contato do site de ${name}`,
+      text: message
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return res.status(500).send(error.toString());
+      }
+      console.log("Email enviado:", info)
+      res.status(200).send("Mensagem enviada com sucesso!");
+    });
+  })
+)
 
-app.post('/api/contact', (req, res) => {
+/*app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
   
   // Configure o transporter do nodemailer com suas credenciais de e-mail
@@ -52,8 +81,8 @@ app.post('/api/contact', (req, res) => {
     console.log("Email enviado:", info)
     res.status(200).send("Mensagem enviada com sucesso!");
   });
-});
+});*/
 
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
