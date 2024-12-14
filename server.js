@@ -15,14 +15,14 @@ app.post('/api/contact', (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'georgenes1999@gmail.com',
-      pass: 'gxhk gacr dlta sujk'
+      user: 'seu_gmail@gmail.com',
+      pass: 'sua_senha_de_app_do_gmail' //importante que seja "senha de app" do gmail
     }
   });
 
   const mailOptions = {
     from: email,
-    to: 'jfk@kwaut.com',
+    to: 'email_destino',
     subject: `Contato do site de ${name}`,
     text: message
   };
